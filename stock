@@ -1,0 +1,110 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+
+public class stock_manipulation {
+    public stock_manipulation() {
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Double> companyStockPrices = new ArrayList(List.of(20.4, 12.2, 13.7, 20.9, 34.2, 20.7, 50.6));
+        int[] stockPrices = new int[]{14, 99, 54, 34, 12, 99, 54};
+        ArrayList<Double> cumulativeSumList = computeCumulativeSum(companyStockPrices);
+        System.out.println(" the cumulative sum is: " + cumulativeSumList);
+        double averagePrice = (double)calculateAveragePrice(stockPrices);
+        System.out.println("the average price is: " + averagePrice);
+        double companyAveragePrice = (double)calculateAveragePrice(companyStockPrices);
+        System.out.println("the average price for the company is: " + companyAveragePrice);
+        int maximumPrice = findMaximumPrice(stockPrices);
+        System.out.println("the max price is: " + maximumPrice);
+        double companyMaxPrice = findMaximumPrice(companyStockPrices);
+        System.out.println("the company max price is: " + companyMaxPrice);
+        String targetQuestion = "what is the target?: ";
+        System.out.println(targetQuestion);
+        double target = (double)scanner.nextInt();
+        int targetPriceOccurrences = countOccurrences(stockPrices, target);
+        System.out.println("the target occurred: " + targetPriceOccurrences + " time(s)");
+    }
+
+    public static ArrayList<Double> computeCumulativeSum(ArrayList<Double> arr) {
+        ArrayList<Double> cumulative_sum = new ArrayList();
+        double sum = 0.0;
+        Iterator var4 = arr.iterator();
+
+        while(var4.hasNext()) {
+            double i = (Double)var4.next();
+            sum += i;
+            cumulative_sum.add(sum);
+        }
+
+        return cumulative_sum;
+    }
+
+    public static int calculateAveragePrice(int[] arr) {
+        int sum = 0;
+
+        for(int i = 0; i < arr.length; ++i) {
+            sum += arr[i];
+        }
+
+        return sum / arr.length;
+    }
+
+    public static int calculateAveragePrice(ArrayList<Double> arr) {
+        int sum = 0;
+
+        for(int i = 0; i < arr.size(); ++i) {
+            sum = (int)((double)sum + (Double)arr.get(i));
+        }
+
+        return sum / arr.size();
+    }
+
+    public static int findMaximumPrice(int[] arr) {
+        int max = arr[0];
+
+        for(int i = 1; i < arr.length; ++i) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+
+        return max;
+    }
+
+    public static double findMaximumPrice(ArrayList<Double> arr) {
+        double max = 0.0;
+        Iterator var3 = arr.iterator();
+
+        while(var3.hasNext()) {
+            double price = (Double)var3.next();
+            if (price > max) {
+                max = price;
+            }
+        }
+
+        return max;
+    }
+
+    public static int countOccurrences(int[] prices, double targetPrice) {
+        int count = 0;
+        int[] var4 = prices;
+        int var5 = prices.length;
+
+        for(int var6 = 0; var6 < var5; ++var6) {
+            double price = (double)var4[var6];
+            if (price == targetPrice) {
+                ++count;
+            }
+        }
+
+        return count;
+    }
+}
